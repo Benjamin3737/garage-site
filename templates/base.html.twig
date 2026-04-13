@@ -21,20 +21,17 @@
 	</head>
 
 	<body>
-		<nav class="navbar flex-column ">
+<nav class="navbar flex-column py-2">
 
-			<div class="text-center my-3">
-				<img src="/assets/img/logo-05.png" alt="Logo" style="width: 100px;">
-			</div>
+    <img src="/assets/img/logo-05.png" alt="Logo" style="width: 80px;">
 
-			<div class="d-flex justify-content-center gap-4 pb-3">
-				<a class="nav-link text-white" href="/">Véhicules</a>
-				<a class="nav-link text-white" href="/services">Prestations atelier</a>
-				<a class="nav-link text-white" href="/services">Prestations Nettoyage</a>
-				<a class="nav-link text-white" href="/contact">Contact</a>
-			</div>
-
-		</nav>
+    <div class="d-flex gap-4 mt-2">
+        <a class="nav-link text-white" href="/">Véhicules</a>
+        <a class="nav-link text-white" href="/services">Prestations atelier</a>
+        <a class="nav-link text-white" href="/services">Prestations Nettoyage</a>
+        <a class="nav-link text-white" href="/contact">Contact</a>
+    </div>
+</nav>
 		{% block body %}{% endblock %}
 	</body>
 </html>
