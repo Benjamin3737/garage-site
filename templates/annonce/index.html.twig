@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section id="annonces">
+		<h2>Nos véhicules</h2>
+		<div class="annonces-grid">
+			{% for annonce in annonces %}
+				<div class="annonce-card">
+					{% if annonce.image %}
+						<img src="{{ asset('uploads/annonces/' ~ annonce.image) }}" alt="{{ annonce.titre }}">
+					{% else %}
+						<div class="annonce-card-no-img">Pas de photo</div>
+					{% endif %}
+					<div class="annonce-card-body">
+						<h3>{{ annonce.titre }}</h3>
+						<p class="annonce-prix">{{ annonce.prix }}
+							€</p>
+						<div class="annonce-details">
+							<span>{{ annonce.annee }}</span>
+							<span>{{ annonce.kilometrage }}
+								km</span>
+							<span>{{ annonce.carburant }}</span>
+						</div>
+						<form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}" onsubmit="return confirm('Supprimer cette annonce ?')">
+							<input type="hidden" name="_method" value="DELETE">
+							<button type="submit" class="btn-delete">Supprimer l'annonce</button>
+						</form>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</section>
+{% endblock %}

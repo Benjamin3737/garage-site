@@ -15,57 +15,89 @@
 			<h1 class="mb-4">Bienvenue sur le site de notre garage !</h1>
 			<p class="mb-3">
 				Ouvert depuis 2021, nous proposons vente de véhicules d'occasion,
-												            réparations, entretien et nettoyage à Grand Couronne.
+																            réparations, entretien et nettoyage à Grand Couronne.
 			</p>
 			<p>N'hésitez pas à nous contacter pour prendre rendez-vous.</p>
 		</div>
 
 	</div>
 
-	<!-- CONTACT -->
+	<section id="vehicules">
+    <h2>Nos véhicules</h2>
+    <div class="annonces-grid">
+        {% for annonce in annonces %}
+        <div class="annonce-card">
+            {% if annonce.image %}
+                <img src="{{ asset('uploads/annonces/' ~ annonce.image) }}" alt="{{ annonce.titre }}">
+            {% else %}
+                <div class="annonce-card-no-img">Pas de photo</div>
+            {% endif %}
+            <div class="annonce-card-body">
+                <h3>{{ annonce.titre }}</h3>
+                <p class="annonce-prix">{{ annonce.prix }} €</p>
+                <div class="annonce-details">
+                    <span>{{ annonce.annee }}</span>
+                    <span>{{ annonce.kilometrage }} km</span>
+                    <span>{{ annonce.carburant }}</span>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    {% if annonces|length == 6 %}
+    <div class="text-center mt-4">
+        <a href="{{ path('app_annonces') }}" class="btn-voir-plus">Voir toutes les annonces</a>
+    </div>
+    {% endif %}
+
+    <div class="text-center mt-3">
+        <a href="{{ path('app_annonce_new') }}" class="btn-add">+ Ajouter une annonce</a>
+    </div>
+</section>
+
 	<section id="contact">
-	<h2>Contact</h2>
-	<form method="post">
+		<h2>Contact</h2>
+		<form method="post">
 
-		<div class="contact-row">
-			<div>
-				<label for="first_name">Prénom</label>
-				<input type="text" id="first_name" placeholder="Prénom" name="first_name">
+			<div class="contact-row">
+				<div>
+					<label for="first_name">Prénom</label>
+					<input type="text" id="first_name" placeholder="Prénom" name="first_name">
+				</div>
+				<div>
+					<label for="last_name">Nom</label>
+					<input type="text" id="last_name" placeholder="Nom" name="last_name">
+				</div>
 			</div>
+
 			<div>
-				<label for="last_name">Nom</label>
-				<input type="text" id="last_name" placeholder="Nom" name="last_name">
+				<label for="email">Email</label>
+				<input type="email" id="email" placeholder="Email" name="email">
 			</div>
-		</div>
 
-		<div>
-			<label for="email">Email</label>
-			<input type="email" id="email" placeholder="Email" name="email">
-		</div>
+			<div>
+				<label for="phone">Téléphone</label>
+				<input type="tel" id="phone" placeholder="Téléphone" name="phone">
+			</div>
 
-		<div>
-			<label for="phone">Téléphone</label>
-			<input type="tel" id="phone" placeholder="Téléphone" name="phone">
-		</div>
+			<div>
+				<label for="subject">Sujet</label>
+				<select id="subject" name="subject">
+					<option value="">Sélectionnez un sujet</option>
+					<option value="devis">Demande de devis</option>
+					<option value="question">Question sur un service</option>
+					<option value="retour">Retour d'expérience</option>
+					<option value="autre">Autre demande</option>
+				</select>
+			</div>
 
-		<div>
-			<label for="subject">Sujet</label>
-			<select id="subject" name="subject">
-				<option value="">Sélectionnez un sujet</option>
-				<option value="devis">Demande de devis</option>
-				<option value="question">Question sur un service</option>
-				<option value="retour">Retour d'expérience</option>
-				<option value="autre">Autre demande</option>
-			</select>
-		</div>
+			<div>
+				<label for="content">Message</label>
+				<textarea id="content" placeholder="Votre message" name="content"></textarea>
+			</div>
 
-		<div>
-			<label for="content">Message</label>
-			<textarea id="content" placeholder="Votre message" name="content"></textarea>
-		</div>
-
-		<button type="submit">Envoyer</button>
-	</form>
+			<button type="submit">Envoyer</button>
+		</form>
 	</section>
 
 {% endblock %}

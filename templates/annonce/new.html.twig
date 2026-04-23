@@ -1,0 +1,48 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section id="annonce-form">
+		<h2>Ajouter une annonce</h2>
+		<form method="post" enctype="multipart/form-data">
+			<div class="contact-row">
+				<div>
+					<label for="titre">Titre</label>
+					<input type="text" id="titre" name="titre" placeholder="Ex: BMW Série 3 2020">
+				</div>
+				<div>
+					<label for="prix">Prix (€)</label>
+					<input type="number" id="prix" name="prix" placeholder="Ex: 15000">
+				</div>
+			</div>
+			<div class="contact-row">
+				<div>
+					<label for="kilometrage">Kilométrage</label>
+					<input type="number" id="kilometrage" name="kilometrage" placeholder="Ex: 80000">
+				</div>
+				<div>
+					<label for="annee">Année</label>
+					<input type="number" id="annee" name="annee" placeholder="Ex: 2020">
+				</div>
+			</div>
+			<div>
+				<label for="carburant">Carburant</label>
+				<select id="carburant" name="carburant">
+					<option value="">Sélectionnez</option>
+					<option value="Essence">Essence</option>
+					<option value="Diesel">Diesel</option>
+					<option value="Hybride">Hybride</option>
+					<option value="Électrique">Électrique</option>
+				</select>
+			</div>
+			<div>
+				<label for="description">Description</label>
+				<textarea id="description" name="description" placeholder="Décrivez le véhicule..."></textarea>
+			</div>
+			<div>
+				<label for="image">Photo du véhicule</label>
+				<input type="file" id="image" name="image" accept="image/*">
+			</div>
+			<button type="submit">Poster l'annonce</button>
+		</form>
+	</section>
+{% endblock %}
