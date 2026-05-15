@@ -48,7 +48,7 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute('app_annonces');
         }
 
-        return $this->render('annonce/new.html.twig');
+        return $this->render('annonce/annonce.html.twig');
     }
 
     #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
