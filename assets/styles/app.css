@@ -4,7 +4,8 @@ body {
     padding: 0;
 }
 
-html, body {
+html,
+body {
     margin: 0;
     padding: 0;
     background: #0a0f1e;
@@ -426,6 +427,51 @@ nav {
     margin-right: auto;
     padding-left: 20px;
     padding-right: 20px;
+}
 
-    color: #aaa;
+.Mentions-legales a {
+    color: #378add;
+    text-decoration: none;
+}
+
+#mentions-legales {
+    background: #0a0f1e;
+    padding: 4rem 2rem;
+    min-height: 80vh;
+}
+
+.mentions-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+#mentions-legales h1 {
+    color: #e6f1fb;
+    font-size: 28px;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 0.5px solid #1e3a5f;
+}
+
+.mentions-block {
+    margin-bottom: 2rem;
+}
+
+.mentions-block h2 {
+    color: #378add;
+    font-size: 16px;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+}
+
+.mentions-block p {
+    color: #85b7eb;
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 0.25rem;
+}
+
+.mentions-block strong {
+    color: #e6f1fb;
 }
