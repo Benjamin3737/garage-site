@@ -20,8 +20,7 @@
 							<span>{{ annonce.kilometrage }}
 								km</span>
 							<span>{{ annonce.carburant }}</span>
-						</div>
-						<form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}" onsubmit="return confirm('Supprimer cette annonce ?')">
+						</div>					{% if is_granted('ROLE_ADMIN') %}						<form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}" onsubmit="return confirm('Supprimer cette annonce ?')">
 							<input type="hidden" name="_method" value="DELETE">
 							<button type="submit" class="btn-delete">Supprimer l'annonce</button>
 						</form>

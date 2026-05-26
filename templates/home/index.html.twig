@@ -50,9 +50,11 @@
     </div>
     {% endif %}
 
+    {% if is_granted('ROLE_ADMIN') %}
     <div class="text-center mt-3">
         <a href="{{ path('app_annonce_new') }}" class="btn-add">+ Ajouter une annonce</a>
     </div>
+    {% endif %}
 </section>
 
 	<section id="contact">

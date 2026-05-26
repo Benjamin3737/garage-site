@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+<section class="container py-5" style="max-width: 480px; margin: 0 auto;">
+    <h2 class="text-white mb-4">Connexion</h2>
+
+    {% if error %}
+        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    {% endif %}
+
+    <form action="{{ path('app_login') }}" method="post" class="bg-dark p-4 rounded-4" style="background: #111827; border: 1px solid #1e3a5f;">
+        <div class="mb-3">
+            <label for="email" class="form-label text-white">Email</label>
+            <input type="email" id="email" name="email" value="{{ last_username }}" required autofocus class="form-control bg-black text-white border-secondary" style="border-radius: 8px;" />
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label text-white">Mot de passe</label>
+            <input type="password" id="password" name="password" required class="form-control bg-black text-white border-secondary" style="border-radius: 8px;" />
+        </div>
+            <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}" />
+
+        <button type="submit" class="btn btn-primary w-100" style="background: #185fa5; border: none;">Se connecter</button>
+    </form>
+</section>
+{% endblock %}

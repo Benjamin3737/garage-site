@@ -1,9 +1,3 @@
-body {
-    background: #0a0f1e;
-    margin: 0;
-    padding: 0;
-}
-
 html,
 body {
     margin: 0;
@@ -53,7 +47,8 @@ nav {
     gap: 12px;
 }
 
-#annonce-form label {
+#annonce-form label,
+#contact label {
     display: block;
     color: #85b7eb;
     font-size: 12px;
@@ -62,7 +57,10 @@ nav {
 
 #annonce-form input,
 #annonce-form select,
-#annonce-form textarea {
+#annonce-form textarea,
+#contact input,
+#contact select,
+#contact textarea {
     background: #0c0c0e;
     border: 0.5px solid #1e3a5f;
     border-radius: 8px;
@@ -78,7 +76,10 @@ nav {
 
 #annonce-form input:focus,
 #annonce-form select:focus,
-#annonce-form textarea:focus {
+#annonce-form textarea:focus,
+#contact input:focus,
+#contact select:focus,
+#contact textarea:focus {
     border-color: #378add;
 }
 
@@ -86,12 +87,22 @@ nav {
     background: #0d1b2e;
 }
 
+#contact select option {
+    background: #ffffff;
+}
+
 #annonce-form textarea {
     resize: vertical;
     min-height: 100px;
 }
 
-#annonce-form button[type="submit"] {
+#contact textarea {
+    resize: vertical;
+    min-height: 90px;
+}
+
+#annonce-form button[type="submit"],
+#contact button[type="submit"] {
     width: 100%;
     padding: 11px;
     background: #185fa5;
@@ -104,11 +115,13 @@ nav {
     transition: background 0.15s;
 }
 
-#annonce-form button[type="submit"]:hover {
+#annonce-form button[type="submit"]:hover,
+#contact button[type="submit"]:hover {
     background: #378add;
 }
 
-#annonce-form button[type="submit"]:active {
+#annonce-form button[type="submit"]:active,
+#contact button[type="submit"]:active {
     transform: scale(0.98);
 }
 
@@ -407,10 +420,6 @@ nav {
 #map {
     width: 100%;
     height: 250px;
-}
-
-.Mentions-legales {
-    align-items: center;
 }
 
 .column1 {

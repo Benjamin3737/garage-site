@@ -25,6 +25,10 @@ class AnnonceController extends AbstractController
     #[Route('/annonce/new', name: 'app_annonce_new', methods: ['GET', 'POST'])]
     public function new(Request $request, EntityManagerInterface $em): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
+        }
+
         if ($request->isMethod('POST')) {
             $annonce = new Annonce();
             $annonce->setTitre($request->request->get('titre'));
@@ -54,6 +58,10 @@ class AnnonceController extends AbstractController
     #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
     public function delete(Annonce $annonce, EntityManagerInterface $em): Response
     {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
+        }
+
         if ($annonce->getImage()) {
             $imagePath = $this->getParameter('images_directory') . '/' . $annonce->getImage();
             if (file_exists($imagePath)) {
