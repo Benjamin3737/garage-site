@@ -22,10 +22,13 @@
 							<span>{{ annonce.carburant }}</span>
 						</div>
 						{% if is_granted('ROLE_ADMIN') %}
+						<div class="admin-actions">
+							<a class="btn-edit" href="{{ path('app_annonce_edit', {id: annonce.id}) }}">Modifier</a>
 							<form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}" onsubmit="return confirm('Supprimer cette annonce ?')">
 								<input type="hidden" name="_method" value="DELETE">
 								<button type="submit" class="btn-delete">Supprimer l'annonce</button>
 							</form>
+						</div>
 						{% endif %}
 					</div>
 				</div>

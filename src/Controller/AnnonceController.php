@@ -29,8 +29,9 @@ class AnnonceController extends AbstractController
             throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
         }
 
+        $annonce = new Annonce();
+
         if ($request->isMethod('POST')) {
-            $annonce = new Annonce();
             $annonce->setTitre($request->request->get('titre'));
             $annonce->setPrix($request->request->get('prix'));
             $annonce->setKilometrage($request->request->get('kilometrage'));
@@ -52,7 +53,48 @@ class AnnonceController extends AbstractController
             return $this->redirectToRoute('app_annonces');
         }
 
-        return $this->render('annonce/annonce.html.twig');
+        return $this->render('annonce/annonce.html.twig', [
+            'annonce' => $annonce,
+        ]);
+    }
+
+    #[Route('/annonce/{id}/edit', name: 'app_annonce_edit', methods: ['GET', 'POST'])]
+    public function edit(Annonce $annonce, Request $request, EntityManagerInterface $em): Response
+    {
+        if (!$this->isGranted('ROLE_ADMIN')) {
+            throw $this->createAccessDeniedException('Accès réservé aux administrateurs.');
+        }
+
+        if ($request->isMethod('POST')) {
+            $annonce->setTitre($request->request->get('titre'));
+            $annonce->setPrix($request->request->get('prix'));
+            $annonce->setKilometrage($request->request->get('kilometrage'));
+            $annonce->setAnnee($request->request->get('annee'));
+            $annonce->setCarburant($request->request->get('carburant'));
+            $annonce->setDescription($request->request->get('description'));
+
+            $file = $request->files->get('image');
+            if ($file) {
+                if ($annonce->getImage()) {
+                    $oldImage = $this->getParameter('images_directory') . '/' . $annonce->getImage();
+                    if (file_exists($oldImage)) {
+                        unlink($oldImage);
+                    }
+                }
+
+                $filename = uniqid() . '.' . $file->guessExtension();
+                $file->move($this->getParameter('images_directory'), $filename);
+                $annonce->setImage($filename);
+            }
+
+            $em->flush();
+
+            return $this->redirectToRoute('app_annonces');
+        }
+
+        return $this->render('annonce/annonce.html.twig', [
+            'annonce' => $annonce,
+        ]);
     }
 
     #[Route('/annonce/{id}/delete', name: 'app_annonce_delete', methods: ['POST'])]
