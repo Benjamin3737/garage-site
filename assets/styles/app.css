@@ -33,6 +33,11 @@ nav .d-flex {
     z-index: 3;
 }
 
+.main-content {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+}
+
 nav .nav-link {
     white-space: nowrap;
     font-size: 0.95rem;
