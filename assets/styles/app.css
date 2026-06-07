@@ -31,12 +31,22 @@ nav h1 {
 .nav-top {
     width: 100%;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
+    position: relative;
+}
+
+.nav-top > a {
+    margin: 0 auto;
+    display: block;
 }
 
 .nav-toggle {
     display: none;
+    position: absolute;
+    right: 1rem;
+    top: 50%;
+    transform: translateY(-50%);
     border: none;
     background: transparent;
     color: white;
