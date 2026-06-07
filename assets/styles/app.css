@@ -20,10 +20,58 @@ nav h1 {
     margin: 0.75rem 0;
 }
 
-nav .d-flex {
+.nav-links {
+    display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 0.75rem;
+    width: 100%;
+}
+
+.nav-top {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-toggle {
+    display: none;
+    border: none;
+    background: transparent;
+    color: white;
+    cursor: pointer;
+    width: 44px;
+    height: 44px;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.nav-toggle-bar,
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: white;
+    border-radius: 2px;
+    position: relative;
+}
+
+.nav-toggle-bar::before,
+.nav-toggle-bar::after {
+    content: '';
+    position: absolute;
+    left: 0;
+}
+
+.nav-toggle-bar::before {
+    top: -7px;
+}
+
+.nav-toggle-bar::after {
+    top: 7px;
 }
 
 .navbar {
@@ -586,15 +634,28 @@ nav .nav-link:hover {
 }
 
 @media (max-width: 576px) {
-    nav .d-flex {
+    .nav-toggle {
+        display: flex;
+    }
+
+    .nav-links {
+        display: none;
         flex-direction: column;
         align-items: center;
         width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.25s ease;
+    }
+
+    .nav-links.open {
+        display: flex;
+        max-height: 500px;
     }
 
     nav .nav-link {
-        padding: 0.5rem 0.75rem;
-        width: auto;
+        padding: 0.75rem 0.75rem;
+        width: 100%;
         text-align: center;
     }
 }

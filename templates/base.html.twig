@@ -23,11 +23,16 @@
 
     <body class="d-flex flex-column">
         <nav class="navbar flex-column">
-            <a href="{{ path('app_home') }}">
-                <img src="{{ asset('assets/img/logo-05.png') }}" alt="Logo" style="width: 100px;">
-            </a>
+            <div class="nav-top w-100 d-flex align-items-center justify-content-between px-3 py-2">
+                <a href="{{ path('app_home') }}">
+                    <img src="{{ asset('assets/img/logo-05.png') }}" alt="Logo" style="width: 100px;">
+                </a>
+                <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-links" aria-label="Ouvrir le menu">
+                    <span class="nav-toggle-bar"></span>
+                </button>
+            </div>
             <h1 class="mt-2 mb-3">Julien Automobiles</h1>
-            <div class="d-flex gap-4 mt-2">
+            <div id="nav-links" class="nav-links gap-4 mt-2">
                 <a class="nav-link text-white" href="{{ path('app_annonces') }}">Véhicules</a>
                 <a class="nav-link text-white" href="{{ path('app_services') }}">Prestations atelier</a>
                 <a class="nav-link text-white" href="{{ path('app_cleaning') }}">Prestations Nettoyage</a>
