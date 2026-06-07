@@ -9,6 +9,9 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: ContactMessageRepository::class)]
 class ContactMessage
 {
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]

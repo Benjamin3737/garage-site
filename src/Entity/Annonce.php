@@ -9,6 +9,10 @@ use Doctrine\ORM\Mapping as ORM;
 #[ORM\Entity(repositoryClass: AnnonceRepository::class)]
 class Annonce
 {
+
+    #[ORM\ManyToOne(targetEntity: User::class)]
+    #[ORM\JoinColumn(nullable: true)]
+    private ?User $user = null;
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
