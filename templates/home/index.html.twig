@@ -53,13 +53,14 @@
     {% if is_granted('ROLE_ADMIN') %}
     <div class="text-center mt-3">
         <a href="{{ path('app_annonce_new') }}" class="btn-add">+ Ajouter une annonce</a>
+        <a href="{{ path('app_admin_dashboard') }}" class="btn btn-secondary ms-2">Tableau de bord admin</a>
     </div>
     {% endif %}
 </section>
 
 	<section id="contact">
 		<h2>Contact</h2>
-		<form method="post">
+		<form action="{{ path('app_contact') }}" method="post">
 
 			<div class="contact-row">
 				<div>
