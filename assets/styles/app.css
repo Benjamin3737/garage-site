@@ -16,8 +16,8 @@ nav {
 
 nav h1 {
     color: #85b7eb;
-    font-size: 1.5rem;
-    margin: 0.75rem 0;
+    font-size: 0.5rem;
+    margin: 0.5rem 0;
 }
 
 .nav-links {
@@ -660,7 +660,8 @@ nav .nav-link:hover {
 
     .nav-links.open {
         display: flex;
-        max-height: 500px;
+        max-height: 280px;
+        overflow-y: auto;
     }
 
     nav .nav-link {

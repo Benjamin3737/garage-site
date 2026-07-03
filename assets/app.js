@@ -9,7 +9,7 @@ import './styles/app.css';
 
 console.log('This log comes from assets/app.js - welcome to AssetMapper! 🎉');
 
-document.addEventListener('DOMContentLoaded', () => {
+function setupBurgerMenu() {
     const navToggle = document.querySelector('.nav-toggle');
     const navLinks = document.querySelector('.nav-links');
 
@@ -28,4 +28,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
     }
-});
+}
+
+// Initial setup on DOM ready
+document.addEventListener('DOMContentLoaded', setupBurgerMenu);
+
+// Re-setup after Turbo navigation
+document.addEventListener('turbo:load', setupBurgerMenu);
