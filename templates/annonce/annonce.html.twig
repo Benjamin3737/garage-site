@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section id="annonce-form">
+		<h2>{% if annonce is defined and annonce.id %}Modifier une annonce{% else %}Ajouter une annonce{% endif %}</h2>
+		<form method="post" enctype="multipart/form-data">
+			<div class="contact-row">
+				<div>
+					<label for="titre">Titre</label>
+					<input type="text" id="titre" name="titre" placeholder="Ex: BMW Série 3 2020" value="{{ annonce.titre|default('') }}">
+				</div>
+				<div>
+					<label for="prix">Prix (€)</label>
+					<input type="number" id="prix" name="prix" placeholder="Ex: 15000" value="{{ annonce.prix|default('') }}">
+				</div>
+			</div>
+			<div class="contact-row">
+				<div>
+					<label for="kilometrage">Kilométrage</label>
+					<input type="number" id="kilometrage" name="kilometrage" placeholder="Ex: 80000" value="{{ annonce.kilometrage|default('') }}">
+				</div>
+				<div>
+					<label for="annee">Année</label>
+					<input type="number" id="annee" name="annee" placeholder="Ex: 2020" value="{{ annonce.annee|default('') }}">
+				</div>
+			</div>
+			<div>
+				<label for="carburant">Carburant</label>
+				<select id="carburant" name="carburant">
+					<option value="">Sélectionnez</option>
+					<option value="Essence" {% if annonce.carburant == 'Essence' %}selected{% endif %}>Essence</option>
+					<option value="Diesel" {% if annonce.carburant == 'Diesel' %}selected{% endif %}>Diesel</option>
+					<option value="Hybride" {% if annonce.carburant == 'Hybride' %}selected{% endif %}>Hybride</option>
+					<option value="Électrique" {% if annonce.carburant == 'Électrique' %}selected{% endif %}>Électrique</option>
+				</select>
+			</div>
+			<div>
+				<label for="description">Description</label>
+				<textarea id="description" name="description" placeholder="Décrivez le véhicule...">{{ annonce.description|default('') }}</textarea>
+			</div>
+			<div>
+				<label for="image">Photo du véhicule</label>
+				<input type="file" id="image" name="image" accept="image/*">
+				{% if annonce.image %}
+					<p>Image actuelle : {{ annonce.image }}</p>
+				{% endif %}
+			</div>
+			<button type="submit">{% if annonce is defined and annonce.id %}Mettre à jour{% else %}Poster l'annonce{% endif %}</button>
+		</form>
+	</section>
+{% endblock %}

@@ -1,0 +1,149 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Tableau de bord admin{% endblock %}
+
+{% block body %}
+<div class="container py-5">
+    <div class="d-flex align-items-center justify-content-between mb-4">
+        <div>
+            <h1 class="mb-1">Tableau de bord</h1>
+            <p class="text-muted">Bienvenue, {{ app.user.email }}. Suivez rapidement les chiffres clés.</p>
+        </div>
+        <div>
+            <a href="{{ path('app_annonces') }}" class="btn btn-outline-light me-2">Voir les annonces</a>
+            <a href="{{ path('app_annonce_new') }}" class="btn btn-primary">Ajouter une annonce</a>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-6 col-lg-4">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Annonces</h5>
+                    <p class="display-6 mb-0">{{ annoncesCount }}</p>
+                    <p class="text-muted">Nombre total d’annonces publiées</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Utilisateurs</h5>
+                    <p class="display-6 mb-0">{{ usersCount }}</p>
+                    <p class="text-muted">Comptes enregistrés</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Admins</h5>
+                    <p class="display-6 mb-0">{{ adminCount }}</p>
+                    <p class="text-muted">Comptes admin actifs</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6 col-lg-4">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Messages</h5>
+                    <p class="display-6 mb-0">{{ messagesCount }}</p>
+                    <p class="text-muted">Messages reçus via le formulaire de contact</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-12 col-lg-4">
+            <div class="card bg-dark text-white h-100">
+                <div class="card-body">
+                    <h5 class="card-title">Accès rapide</h5>
+                    <ul class="list-unstyled mb-0">
+                        <li><a href="{{ path('app_annonces') }}" class="text-white">Voir les annonces</a></li>
+                        <li><a href="{{ path('app_annonce_new') }}" class="text-white">Créer une annonce</a></li>
+                        <li><a href="{{ path('app_home') }}" class="text-white">Retour au site</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card bg-light bg-opacity-10 border-0">
+        <div class="card-body">
+            <h2 class="h4 mb-4">Dernières annonces</h2>
+            {% if recentAnnonces is not empty %}
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Titre</th>
+                                <th>Prix</th>
+                                <th>Année</th>
+                                <th>Kilométrage</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for annonce in recentAnnonces %}
+                                <tr>
+                                    <td>{{ annonce.titre }}</td>
+                                    <td>{{ annonce.prix }} €</td>
+                                    <td>{{ annonce.annee }}</td>
+                                    <td>{{ annonce.kilometrage }} km</td>
+                                    <td><a href="{{ path('app_annonce_edit', {id: annonce.id}) }}" class="btn btn-sm btn-outline-light">Modifier</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>Aucune annonce disponible pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <div class="card bg-light bg-opacity-10 border-0 mt-4">
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <h2 class="h4 mb-0">Derniers messages contact</h2>
+                <span class="badge bg-secondary">{{ messagesCount }} reçus</span>
+            </div>
+            {% if recentMessages is not empty %}
+                <div class="table-responsive">
+                    <table class="table table-dark table-striped align-middle mb-0">
+                        <thead>
+                            <tr>
+                                <th>Nom</th>
+                                <th>Sujet</th>
+                                <th>Email</th>
+                                <th>Date</th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for message in recentMessages %}
+                                <tr>
+                                    <td>{{ message.firstName }} {{ message.lastName }}</td>
+                                    <td>{{ message.subject ?: 'Sans sujet' }}</td>
+                                    <td>{{ message.email }}</td>
+                                    <td>{{ message.createdAt|date('d/m/Y H:i') }}</td>
+                                    <td><button type="button" class="btn btn-sm btn-outline-light" data-bs-toggle="collapse" data-bs-target="#message-{{ message.id }}">Voir</button></td>
+                                </tr>
+                                <tr class="collapse" id="message-{{ message.id }}">
+                                    <td colspan="5">
+                                        <strong>Message :</strong>
+                                        <p class="mb-0">{{ message.content }}</p>
+                                        {% if message.phone %}
+                                            <p class="text-muted mb-0"><strong>Téléphone :</strong> {{ message.phone }}</p>
+                                        {% endif %}
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <p>Aucun message reçu pour le moment.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+{% endblock %}

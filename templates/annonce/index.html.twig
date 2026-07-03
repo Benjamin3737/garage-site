@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+	<section id="annonces">
+		<h2>Nos véhicules</h2>
+		<div class="annonces-grid">
+			{% for annonce in annonces %}
+				<div class="annonce-card">
+					{% if annonce.image %}
+						<img src="{{ asset('uploads/annonces/' ~ annonce.image) }}" alt="{{ annonce.titre }}">
+					{% else %}
+						<div class="annonce-card-no-img">Pas de photo</div>
+					{% endif %}
+					<div class="annonce-card-body">
+						<h3>{{ annonce.titre }}</h3>
+						<p class="annonce-prix">{{ annonce.prix }}
+							€</p>
+						<div class="annonce-details">
+							<span>{{ annonce.annee }}</span>
+							<span>{{ annonce.kilometrage }}
+								km</span>
+							<span>{{ annonce.carburant }}</span>
+						</div>
+						{% if is_granted('ROLE_ADMIN') %}
+						<div class="admin-actions">
+							<a class="btn-edit" href="{{ path('app_annonce_edit', {id: annonce.id}) }}">Modifier</a>
+							<form method="post" action="{{ path('app_annonce_delete', {id: annonce.id}) }}" onsubmit="return confirm('Supprimer cette annonce ?')">
+								<input type="hidden" name="_method" value="DELETE">
+								<button type="submit" class="btn-delete">Supprimer l'annonce</button>
+							</form>
+						</div>
+						{% endif %}
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+		<div class="garanties">
+			<h2>Garanties</h2>
+			<p>Nos véhicules sont garantis, avec des extensions possibles jusqu'à 60 mois par nos prestataires Direct garantie et Garantie M.</p>
+			<h2 style="margin: 2rem 0 1rem;">Devis</h2>
+		</div>
+	</section>
+{% endblock %}
