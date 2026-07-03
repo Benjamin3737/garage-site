@@ -16,8 +16,12 @@ nav {
 
 nav h1 {
     color: #85b7eb;
-    font-size: 0.5rem;
+    font-size: 1.5rem;
     margin: 0.5rem 0;
+}
+
+.nav-logo {
+    width: 100px;
 }
 
 .nav-links {
@@ -97,7 +101,7 @@ nav h1 {
 
 nav .nav-link {
     white-space: nowrap;
-    font-size: 0.95rem;
+    font-size: 0.75rem;
     padding: 0.35rem 0.65rem;
 }
 
