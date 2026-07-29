@@ -13,3 +13,15 @@ controllers:
 app_register:
     path: /register
     controller: App\Controller\RegistrationController::register
+
+app_forgot_password_request:
+    path: /reset-password
+    controller: App\Controller\ResetPasswordController::request
+
+app_check_email:
+    path: /reset-password/check-email
+    controller: App\Controller\ResetPasswordController::checkEmail
+
+app_reset_password:
+    path: /reset-password/reset/{token}
+    controller: App\Controller\ResetPasswordController::reset

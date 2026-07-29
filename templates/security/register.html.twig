@@ -13,6 +13,12 @@
     {% endfor %}
 
     {{ form_start(registrationForm, {'attr': {'class': 'bg-dark p-4 rounded-4', 'style': 'background: #111827; border: 1px solid #1e3a5f;'}}) }}
+        {% if registrationForm.vars.errors|length > 0 %}
+            <div class="alert alert-danger">
+                {{ form_errors(registrationForm) }}
+            </div>
+        {% endif %}
+
         <div class="mb-3">
             {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'form-label text-white'}}) }}
             {{ form_widget(registrationForm.email, {'attr': {'class': 'form-control bg-black text-white border-secondary', 'style': 'border-radius: 8px;'}}) }}
@@ -30,6 +36,8 @@
             {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'form-control bg-black text-white border-secondary', 'style': 'border-radius: 8px;'}}) }}
             {{ form_errors(registrationForm.plainPassword.second) }}
         </div>
+
+        {{ form_errors(registrationForm.plainPassword) }}
 
         <button type="submit" class="btn btn-primary w-100" style="background: #185fa5; border: none;">Créer un compte</button>
     {{ form_end(registrationForm) }}

@@ -30,6 +30,13 @@ class RegistrationController extends AbstractController
         $form = $this->createForm(RegistrationFormType::class, $user);
         $form->handleRequest($request);
 
+        if ($form->isSubmitted()) {
+            $plainPassword = $form->get('plainPassword')->getData();
+            if (is_string($plainPassword) && strlen($plainPassword) > 0 && strlen($plainPassword) < 6) {
+                $form->get('plainPassword')->addError(new FormError('Votre mot de passe doit contenir au moins 6 caractères.'));
+            }
+        }
+
         if ($form->isSubmitted() && $form->isValid()) {
             $existingUser = $userRepository->findOneBy(['email' => $user->getEmail()]);
             if ($existingUser) {
